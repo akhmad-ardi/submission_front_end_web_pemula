@@ -75,7 +75,7 @@ function displayBook(idParentElement, bookList) {
         <p class="card-subtitle mb-2 text-body-secondary" data-testid="bookItemAuthor">Penulis: ${book.author}</p>
         <p data-testid="bookItemYear">Tahun: ${book.year}</p>
         <div>
-          <button class="btn btn-primary" data-testid="bookItemIsCompleteButton">Selesai dibaca</button>
+          <button class="btn btn-primary" data-testid="bookItemIsCompleteButton">${book.isComplete ? "Belum selesai" : "Selesai"} dibaca</button>
           <button class="btn btn-danger" data-testid="bookItemDeleteButton">Hapus Buku</button>
           <button class="btn btn-outline-primary" data-testid="bookItemEditButton">Edit Buku</button>
         </div>
@@ -98,7 +98,11 @@ function displayBook(idParentElement, bookList) {
           localStorage.setItem('bookList', JSON.stringify(bookList));
         }
       } else {
-        alert(`Anda sudah membaca buku ${book.title} oleh ${book.author}`);
+        if (confirm(`Apakah anda belum selesai membaca buku yang berjudul ${book.title} oleh ${book.author}`)) {
+          bookDetail.isComplete = false;
+  
+          localStorage.setItem('bookList', JSON.stringify(bookList));
+        }
       }
 
       displayBook('incompleteBookList', bookList.filter((b) => !b.isComplete));
