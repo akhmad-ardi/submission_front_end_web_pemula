@@ -52,7 +52,7 @@ searchBook.addEventListener('submit', (event) => {
 
   const bookList = JSON.parse(localStorage.getItem('bookList'));
 
-  const fiterBookList = bookList.filter((book) => book.title.toLowerCase() === searchBookTitle.toLowerCase());
+  const fiterBookList = bookList.filter((book) => book.title.toLowerCase().includes(searchBookTitle.toLowerCase()));
 
   displayBook('incompleteBookList', fiterBookList.filter((b) => !b.isComplete));
   displayBook('completeBookList', fiterBookList.filter((b) => b.isComplete));
